@@ -21,7 +21,7 @@ export default function Home(props) {
   return(
     <View style={styles.mainView}>
       {renderButtons('Timer')}
-      {renderButtons('Goal')}
+      {renderButtons('Goals')}
       {renderButtons('Videos')}
       {renderButtons('Fireworks')}
 

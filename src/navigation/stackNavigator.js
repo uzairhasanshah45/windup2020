@@ -5,6 +5,7 @@ import {createStackNavigator,TransitionPresets} from '@react-navigation/stack';
 import StartScreen from '../screens/StartScreen/StartScreen';
 import HomeScreen from '../screens/Home/Home';
 import Timer from '../screens/Timer/TImer'
+import Goals from "../screens/Goals/Goals";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,10 @@ export default function StackNavigator() {
          <Stack.Screen
           name="Timer"
           component={Timer}
+        />
+        <Stack.Screen
+          name="Goals"
+          component={Goals}
         />
       </Stack.Navigator>
     </NavigationContainer>
