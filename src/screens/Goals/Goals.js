@@ -38,7 +38,6 @@ export default function Goals(props) {
       if (user !== null) {
         let data = JSON.parse(user); 
         setGoalInfo(data)
-        console.log('data --->', data[0].goalName)
       }
     } catch (error) {
       console.log(error.message)
@@ -76,6 +75,21 @@ export default function Goals(props) {
         }
     } 
 
+    const deleteGoal = async (i) =>{
+
+      try {
+        const user = await AsyncStorage.getItem('userInfo');
+        if (user !== null) {
+          let data = JSON.parse(user);
+          data.splice(i,1)
+          await AsyncStorage.setItem('userInfo',JSON.stringify(data)); 
+          setGoalInfo(data)
+        }
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+
 
   return(
     <View style={styles.mainView}>
@@ -88,24 +102,35 @@ export default function Goals(props) {
             </TouchableOpacity>
         </View>
 
-        <View>
-          {
-            goalInfo ? goalInfo.map((item, index) => {
-              return(
-                  <View key={index} style={{ width: 300, paddingBottom: 10, paddingTop: 10, alignContent: 'center'}}>
-                     {/* <View style={{backgroundColor: '#4693FF', flexDirection: 'row', justifyContent: 'space-between', borderWidth: 1, borderColor: '#4693FF', padding: 15, borderRadius: 10}}> */}
-                      <TouchableOpacity style={{backgroundColor: '#4693FF', flexDirection: 'row', justifyContent: 'space-between', borderWidth: 1, borderColor: '#4693FF', padding: 15, borderRadius: 10}}>
-                        <Text style={{color: "white", fontSize: 22, textAlign: 'left'}}>{item.goalName}</Text>
-                        <Text style={{color: "white", fontSize: 22, textAlign: 'right'}}>{item.goalDesc}</Text>
-                      </TouchableOpacity>
-                      {/* </View> */}
-                  </View>
-              )
-            })
-            :
-            <Text style={{color: "white"}}>Sorry</Text>
-          }
-        </View>
+
+        {/*============================================ GOALS CARDS ============================================*/}
+
+        <ScrollView style={{marginTop: '15%',}}>
+          <View style={{alignItems: 'center'}}>
+            {
+              goalInfo ?
+              ( goalInfo.map((item, index) => {
+                return(
+                    <View key={index} style={{ width: 300, paddingBottom: 10, paddingTop: 10, alignContent: 'center', }}>
+                      <View style={{flexDirection: 'row', justifyContent: 'space-between', borderWidth: 1,}}>
+                        <TouchableOpacity style={{backgroundColor: '#4693FF', padding: 15, borderTopLeftRadius: 10, borderBottomLeftRadius: 10, width: 250}}>
+                          <Text style={{color: "white", fontSize: 22, textAlign: 'left'}}>{item.goalName}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{backgroundColor: '#999999', padding: 15, borderTopRightRadius: 10, borderBottomRightRadius: 10}} onPress={() => deleteGoal(index)}>
+                          <Icon name="delete-sweep" size={30} color='white' />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                )
+              })
+              ) : (
+              <Text style={{color: "white"}}>Sorry</Text>
+              )}
+          </View>
+        </ScrollView>
+
+
+        {/*============================================ MODAL ============================================*/}
 
         <View>
           <Modal 
@@ -139,10 +164,16 @@ export default function Goals(props) {
                   mode="date"
                   date={new Date()}
                 />
+                <View style={{flexDirection: 'row'}}>
                 <TouchableOpacity
-                  style={styles.openButton} onPress={() => addInfo()}>
-                  <Text style={styles.textStyle}>Update</Text>
-                </TouchableOpacity>
+                    style={[styles.openButton, {backgroundColor: '#999999'}]} onPress={() => setModalView(false)}>
+                    <Text style={styles.textStyle}>Cancel</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[styles.openButton, {marginLeft: 15}]} onPress={() => addInfo()}>
+                    <Text style={styles.textStyle}>Add</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
           </View>
         </Modal>

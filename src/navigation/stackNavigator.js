@@ -6,6 +6,9 @@ import StartScreen from '../screens/StartScreen/StartScreen';
 import HomeScreen from '../screens/Home/Home';
 import Timer from '../screens/Timer/TImer'
 import Goals from "../screens/Goals/Goals";
+import Flashback from '../screens/Flashback/Flashback'
+import View from '../screens/View/View'
+import Fireworks from '../screens/Fireworks/Fireworks'
 
 const Stack = createStackNavigator();
 
@@ -37,6 +40,18 @@ export default function StackNavigator() {
         <Stack.Screen
           name="Goals"
           component={Goals}
+        />
+        <Stack.Screen
+          name="Flashback"
+          component={Flashback}
+        />
+        <Stack.Screen
+          name="View"
+          component={View}
+        />
+         <Stack.Screen
+          name="Fireworks"
+          component={Fireworks}
         />
       </Stack.Navigator>
     </NavigationContainer>

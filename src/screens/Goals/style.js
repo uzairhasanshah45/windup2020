@@ -5,8 +5,8 @@ export const styles = ScaledSheet.create({
   mainView: {
     flex: 1,
     backgroundColor: colors.primary,
-    alignItems: "center",
-    justifyContent: "center"
+    // alignItems: "center",
+    // justifyContent: "center"
     
   },
   container: {
@@ -40,10 +40,11 @@ export const styles = ScaledSheet.create({
   openButton: {
     backgroundColor: '#4693FF',
     borderRadius: '10@ms',
-    height: '30@ms',
+    height: '34@ms',
     width: '100@ms',
     elevation: 5,
-    marginTop: '50@ms'
+    marginTop: '55@ms',
+    padding: '2@ms'
   },
   textStyle: {
     color: 'white',

@@ -22,7 +22,7 @@ export default function Home(props) {
     <View style={styles.mainView}>
       {renderButtons('Timer')}
       {renderButtons('Goals')}
-      {renderButtons('Videos')}
+      {renderButtons('Flashback')}
       {renderButtons('Fireworks')}
 
     </View>
